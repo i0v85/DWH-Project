@@ -1,0 +1,45 @@
+-------------------------------------
+-- Data Quality For Category Table --
+-------------------------------------
+
+-- Show The Whole Table 
+
+SELECT * FROM bronze.erp_px_cat_g1v2 ;
+
+-- Check for The Diff Between id And bronze silver.crm_prd_info cat_id
+
+SELECT 
+	id 
+FROM bronze.erp_px_cat_g1v2 ; 
+
+--
+
+SELECT 
+	cat_id
+FROM silver.crm_prd_info ;
+
+-- Check For Unwanted Spaces in cat & subcat
+
+SELECT 
+	cat ,
+	subcat
+FROM bronze.erp_px_cat_g1v2 
+WHERE cat != TRIM(cat) OR subcat != TRIM(subcat) ;
+
+-- Data Standerdization And Consistency
+
+SELECT DISTINCT 
+	cat 
+FROM bronze.erp_px_cat_g1v2 ;
+
+--
+
+SELECT DISTINCT 
+	subcat 
+FROM bronze.erp_px_cat_g1v2 ;
+
+--
+
+SELECT DISTINCT 
+	maintenance 
+FROM bronze.erp_px_cat_g1v2 ;

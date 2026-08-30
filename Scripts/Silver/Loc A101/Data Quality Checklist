@@ -1,0 +1,25 @@
+------------------------------------------
+-- Data Quality For Location A101 Table --
+------------------------------------------
+
+-- Show The Whole Table 
+
+SELECT * FROM bronze.erp_loc_a101 ; 
+
+-- Check The Diff Between cid And cst_key 
+
+SELECT 
+	cid 
+FROM bronze.erp_loc_a101 ;
+
+--
+
+SELECT 
+	cst_key 
+FROM silver.crm_cust_info ; 
+
+-- Data Standerdization And Consistency
+
+SELECT DISTINCT 
+	cntry 
+FROM bronze.erp_loc_a101 ;

@@ -1,0 +1,71 @@
+CREATE OR REPLACE PROCEDURE bronze.load_bronze ()
+LANGUAGE plpgsql AS
+$$
+BEGIN 
+
+	RAISE NOTICE 'Start Task' ;
+	
+	RAISE NOTICE 'Start Imoprting Data From crm_cust_info' ;
+	
+	TRUNCATE TABLE bronze.crm_cust_info;
+    COPY bronze.crm_cust_info 
+    FROM '/run/media/mahmoud-atef/Data/Projects/DWH/Datasets/CRM Source/cust_info.csv' 
+    DELIMITER ',' 
+    CSV HEADER;
+
+	RAISE NOTICE 'Finish Importing Data From crm_cust_info' ;
+
+	RAISE NOTICE 'Start Imoprting Data From crm_prd_info' ;
+
+	TRUNCATE TABLE bronze.crm_prd_info ;
+    COPY bronze.crm_prd_info
+    FROM '/run/media/mahmoud-atef/Data/Projects/DWH/Datasets/CRM Source/prd_info.csv' 
+    DELIMITER ',' 
+    CSV HEADER;
+
+	RAISE NOTICE 'Finish Importing Data From prd_info' ;
+
+	RAISE NOTICE 'Start Imoprting Data From sales_details' ;
+
+	TRUNCATE TABLE bronze.crm_sales_details ;
+    COPY bronze.crm_sales_details
+    FROM '/run/media/mahmoud-atef/Data/Projects/DWH/Datasets/CRM Source/sales_details.csv' 
+    DELIMITER ',' 
+    CSV HEADER;
+
+	RAISE NOTICE 'Finish Importing Data From sales_details' ;
+
+	RAISE NOTICE 'Start Imoprting Data From cust_az12' ;
+
+	TRUNCATE TABLE bronze.erp_cust_az12 ;
+    COPY bronze.erp_cust_az12
+    FROM '/run/media/mahmoud-atef/Data/Projects/DWH/Datasets/ERP source/CUST_AZ12.csv' 
+    DELIMITER ',' 
+    CSV HEADER;
+
+	RAISE NOTICE 'Finish Importing Data From cust_az12' ;
+
+	RAISE NOTICE 'Start Imoprting Data From loc_a101' ;
+
+	TRUNCATE TABLE bronze.erp_loc_a101 ;
+    COPY bronze.erp_loc_a101
+    FROM '/run/media/mahmoud-atef/Data/Projects/DWH/Datasets/ERP source/LOC_A101.csv' 
+    DELIMITER ',' 
+    CSV HEADER;
+
+	RAISE NOTICE 'Finish Importing Data From loc_a101' ;
+
+	RAISE NOTICE 'Start Imoprting Data From px_cat_g1v2' ;
+
+	TRUNCATE TABLE bronze.erp_px_cat_g1v2 ;
+    COPY bronze.erp_px_cat_g1v2 
+    FROM '/run/media/mahmoud-atef/Data/Projects/DWH/Datasets/ERP source/PX_CAT_G1V2.csv' 
+    DELIMITER ',' 
+    CSV HEADER;
+
+	RAISE NOTICE 'Finish Importing Data From px_cat_g1v2' ;
+
+	RAISE NOTICE 'End Task' ;
+	
+END ; 
+$$ ;
